@@ -8,12 +8,12 @@ function clean_up() {
     echo "Clean up"
 }
 
-# DATASET_PATH="/sda2/datasets/tiny-imagenet-200/train.json"
-DATASET_PATH="./json/img_align_celeba.json"
+DATASET_PATH="/sda2/datasets/tiny-imagenet-200/train.json"
+# DATASET_PATH="./json/img_align_celeba.json"
 
-python3 -W ignore "dc_gan.py" \
-    --experiment-name "DC-GAN" \
-    --run-description "Vanilla DC-GAN" \
+python3 -W ignore "c_dc_gan.py" \
+    --experiment-name "Conditional DC-GAN" \
+    --run-description "Tiny ImageNet 200" \
     --train-groundtruth-file $DATASET_PATH \
     --num-classes "200" \
     --ngf "64" \
