@@ -368,6 +368,11 @@ def main() -> None:
 
     z = jax.random.normal(key=jax.random.key(seed=44), shape=(1, 1, 1, args.nz))
 
+    # enable MLFlow tracking
+    mlflow.set_tracking_uri(uri=args.tracking_uri)
+    mlflow.set_experiment(experiment_name=args.experiment_name)
+    mlflow.set_system_metrics_sampling_interval(interval=60)
+    mlflow.set_system_metrics_samples_before_logging(samples=1)
     with mlflow.start_run(
         log_system_metrics=True,
         description=args.run_description
@@ -430,11 +435,5 @@ if __name__ == '__main__':
 
     # disable mlflow's tqdm
     os.environ['MLFLOW_ENABLE_ARTIFACTS_PROGRESS_BAR'] = 'false'
-
-    # enable MLFlow tracking
-    mlflow.set_tracking_uri(uri=args.tracking_uri)
-    mlflow.set_experiment(experiment_name=args.experiment_name)
-    mlflow.set_system_metrics_sampling_interval(interval=60)
-    mlflow.set_system_metrics_samples_before_logging(samples=1)
 
     main()
